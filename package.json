@@ -13,7 +13,7 @@
     "semantic-ui-css": "^2.2.12",
     "semantic-ui-react": "^0.73.1"
   },
-  "homepage": "https://roman-pavliv.github.io/weather-app",
+  "homepage": "https://romanpavliv.github.io/weather-app/", 
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
