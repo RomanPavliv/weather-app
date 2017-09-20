@@ -41,20 +41,34 @@ export const getWeatherCurrentUserPosition = (self, currentPosition) => {
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(position => {
           
-          let googleApiURL = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},
-                              ${position.coords.longitude}&language=en&key=AIzaSyAlI3lat_5W-O4wWZ0p1peRh6vFCYeD89I`;
+          if (window.localStorage.lat && 
+              window.localStorage.lat === position.coords.latitude.toFixed(1) &&
+              window.localStorage.lon === position.coords.longitude.toFixed(1)) {
+
+                dispatch({type: 'GET_CITY', payload: window.localStorage.city});
+                getWeather(self);
+          }
+          else {
+
+            let googleApiURL = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},
+            ${position.coords.longitude}&language=en&key=AIzaSyAlI3lat_5W-O4wWZ0p1peRh6vFCYeD89I`;
+
+            axios.get(googleApiURL)
+            .then(res => {
+  
+              dispatch({type: 'GET_CITY', payload: res.data.results[0].address_components[3].long_name});
+              getWeather(self);
+
+              window.localStorage.setItem("lat", position.coords.latitude.toFixed(1));
+              window.localStorage.setItem("lon", position.coords.longitude.toFixed(1));
+              window.localStorage.setItem("city", res.data.results[0].address_components[3].long_name);
+  
+            })
+            .catch(err => {
+              console.log(err);
+            });
+          }
           
-          axios.get(googleApiURL)
-          .then(res => {
-
-            dispatch({type: 'GET_CITY', payload: res.data.results[0].address_components[3].long_name});
-
-            getWeather(self);
-
-          })
-          .catch(err => {
-            console.log(err);
-          });
         });
       } 
       else {
