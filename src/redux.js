@@ -59,9 +59,9 @@ export const getWeatherCurrentUserPosition = (self, currentPosition) => {
               dispatch({type: 'GET_CITY', payload: res.data.results[0].address_components[3].long_name});
               getWeather(self);
 
-              window.localStorage.setItem("lat", position.coords.latitude.toFixed(1));
-              window.localStorage.setItem("lon", position.coords.longitude.toFixed(1));
-              window.localStorage.setItem("city", res.data.results[0].address_components[3].long_name);
+              localStorage.setItem("lat", position.coords.latitude.toFixed(1));
+              localStorage.setItem("lon", position.coords.longitude.toFixed(1));
+              localStorage.setItem("city", res.data.results[0].address_components[3].long_name);
   
             })
             .catch(err => {
