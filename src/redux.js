@@ -40,7 +40,7 @@ export const getWeatherCurrentUserPosition = (self, currentPosition) => {
 
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(position => {
-          console.log('coords*** ', position);
+          
           let googleApiURL = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},
                               ${position.coords.longitude}&language=en&key=AIzaSyAlI3lat_5W-O4wWZ0p1peRh6vFCYeD89I`;
           
