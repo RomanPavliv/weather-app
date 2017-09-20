@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Input, Button, Loader } from 'semantic-ui-react'
+import { Input, Button, Loader } from 'semantic-ui-react';
 import './App.css';
 
 import {  
