@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Input, Button, Loader } from 'semantic-ui-react'
+import { Input, Button, Loader, Header } from 'semantic-ui-react';
 import './App.css';
 
 import {  
@@ -17,10 +17,10 @@ class App extends Component {
   render() {
 
   let weather = this.props.geod.weather ? (this.props.geod.weather ? this.props.geod.weather : <Loader active /> ) : 
-                (window.sessionStorage.getItem('weather') ? '' : <Loader active />);
+                (window.sessionStorage.getItem("weather") ? "" : <Loader active />);
     return (
       <div className="App">
-        <h1>Get the weather!</h1>
+        <Header size="huge">Get the weather!</Header>
          <form>
             <Input type="text" id="city-enter" placeholder="enter city" name="city"
                    onChange={(event) => this.props.getCity(event)} />
@@ -28,9 +28,9 @@ class App extends Component {
             <Button type="button" primary onClick={() => {
                     this.props.getWeatherCurrentUserPosition(this)}}>Search</Button>
         </form>
-        <section id="weather-text" name="weather">
-          The weather in: {weather}
-        </section>
+        <Header size="medium" id="weather-text">
+           {"The weather in: " + weather}
+        </Header>
       </div>
     );
   }

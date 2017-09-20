@@ -25,7 +25,6 @@ export const getWeatherCurrentUserPosition = (self, currentPosition) => {
                       res.data.wind.speed + " m/s";
 
         sessionStorage.setItem('weather', weather);
-  
         dispatch({type: 'GET_WEATHER', payload: weather});
       })
       .catch(err => {
