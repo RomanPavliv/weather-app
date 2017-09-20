@@ -16,7 +16,7 @@ class App extends Component {
 
   render() {
 
-    let weather = this.props.geod.weather ? (this.props.geod.weather ? this.props.geod.weather : <Loader active />) : 
+    let weather = this.props.weatherApp.weather ? (this.props.weatherApp.weather ? this.props.weatherApp.weather : <Loader active />) : 
                 (window.sessionStorage.getItem("weather") ? "" : <Loader active />);
     return (
       <div className="App">
@@ -29,7 +29,7 @@ class App extends Component {
                    onClick={() => {this.props.getWeatherCurrentUserPosition(this)}}>Search</Button>
         </form>
         <Header size="medium" id="weather-text">
-           {"The weather in: " + weather}
+           The weather in: {weather}
         </Header>
       </div>
     );
@@ -37,7 +37,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({  
-  geod: state.geod
+  weatherApp: state.weatherApp
 });
 
 const mapDispatchToProps = { 
