@@ -29,7 +29,9 @@ class App extends Component {
             <Button type="button" primary onClick={() => {
                     this.props.getWeatherCurrentUserPosition(this)}}>Search</Button>
         </form>
-        <section id="weather-text" name="weather">The weather in: {this.props.geod.weather ? this.props.geod.weather : <Loader active/>}</section>
+        <section id="weather-text" name="weather">
+          The weather in: {this.props.geod.weather ? this.props.geod.weather : <Loader active/>}
+        </section>
       </div>
     );
   }
