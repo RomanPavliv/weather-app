@@ -21,6 +21,8 @@ export const getWeatherCurrentUserPosition = (self, currentPosition) => {
         let weather = self.props.geod.city + ", " + res.data.sys.country + " " + res.data.main.temp +  " " +
                       String.fromCharCode(176) + "C, " + res.data.weather[0].description + ", wind: " + 
                       res.data.wind.speed + " m/s";
+
+        sessionStorage.setItem('weather', weather);
   
         dispatch({type: 'GET_WEATHER', payload: weather});
       })

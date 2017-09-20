@@ -19,6 +19,9 @@ class App extends Component {
   }
 
   render() {
+
+  let weather = this.props.geod.weather ? (this.props.geod.weather ? this.props.geod.weather : <Loader active /> ) : 
+                (window.sessionStorage.getItem('weather') ? '' : <Loader active />);
     return (
       <div className="App">
         <h1>Get the weather!</h1>
@@ -30,7 +33,7 @@ class App extends Component {
                     this.props.getWeatherCurrentUserPosition(this)}}>Search</Button>
         </form>
         <section id="weather-text" name="weather">
-          The weather in: {this.props.geod.weather ? this.props.geod.weather : <Loader active/>}
+          The weather in: {weather}
         </section>
       </div>
     );
