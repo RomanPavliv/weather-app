@@ -11,7 +11,9 @@ const initialState = {city: '', weather: ''};
 
 export const getWeatherCurrentUserPosition = (self, currentPosition) => {
   return dispatch => {
+
     sessionStorage.removeItem('weather');
+
     function getWeather(self) {
       let url = `https://api.openweathermap.org/data/2.5/weather/?q=${self.props.geod.city}
                  &units=metric&APPID=1feb720412a26a7828127770f514bf58`;
@@ -38,7 +40,7 @@ export const getWeatherCurrentUserPosition = (self, currentPosition) => {
 
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(position => {
-
+          console.log('coords*** ', position);
           let googleApiURL = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},
                               ${position.coords.longitude}&language=en&key=AIzaSyAlI3lat_5W-O4wWZ0p1peRh6vFCYeD89I`;
           
@@ -46,9 +48,6 @@ export const getWeatherCurrentUserPosition = (self, currentPosition) => {
           .then(res => {
 
             dispatch({type: 'GET_CITY', payload: res.data.results[0].address_components[3].long_name});
-          
-            let url = `https://api.openweathermap.org/data/2.5/weather/?q=${self.props.geod.city} 
-                      &units=metric&APPID=1feb720412a26a7828127770f514bf58`;
 
             getWeather(self);
 
@@ -86,7 +85,7 @@ export const reducers = combineReducers({
   geod,
 });
 
-export function configureStore(initialState = initialState) {  
+export function configureStore(initialState = {}) {  
   const store = createStore(
     reducers,
     initialState,
