@@ -44,8 +44,8 @@ export const getWeatherCurrentUserPosition = (self, currentPosition) => {
               window.localStorage.lat === position.coords.latitude.toFixed(1) &&
               window.localStorage.lon === position.coords.longitude.toFixed(1)) {
 
-                dispatch({type: 'GET_CITY', payload: window.localStorage.city});
-                getWeather(self);
+            dispatch({type: 'GET_CITY', payload: window.localStorage.city});
+            getWeather(self);
           }
           else {
 
