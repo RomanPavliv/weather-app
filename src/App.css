@@ -1,7 +1,6 @@
 .App {
-  position: absolute;
-  top: 10%;
-  left: 30%;
+  margin: auto;
+  padding-top: 5%;
   text-align: center;
 }
 

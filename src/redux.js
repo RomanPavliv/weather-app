@@ -11,8 +11,8 @@ const initialState = {city: '', weather: ''};
 
 export const getWeatherCurrentUserPosition = (self, currentPosition) => {
   return dispatch => {
-    
-    function getWeather(self)  {
+    sessionStorage.removeItem('weather');
+    function getWeather(self) {
       let url = `https://api.openweathermap.org/data/2.5/weather/?q=${self.props.geod.city}
                  &units=metric&APPID=1feb720412a26a7828127770f514bf58`;
       
@@ -86,7 +86,7 @@ export const reducers = combineReducers({
   geod,
 });
 
-export function configureStore(initialState = {}) {  
+export function configureStore(initialState = initialState) {  
   const store = createStore(
     reducers,
     initialState,
