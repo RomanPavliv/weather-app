@@ -13,7 +13,7 @@ export const getWeatherCurrentUserPosition = (self, currentPosition) => {
   return dispatch => {
     sessionStorage.removeItem('weather');
 
-    function getWeather(self) {
+    function getWeather() {
       let weatherUrl = `https://api.openweathermap.org/data/2.5/weather/?q=${self.props.weatherApp.city}
                  &units=metric&APPID=1feb720412a26a7828127770f514bf58`;
       
@@ -32,7 +32,7 @@ export const getWeatherCurrentUserPosition = (self, currentPosition) => {
     }
 
     if (!currentPosition) {
-      getWeather(self);
+      getWeather();
     }
     else {
 
@@ -44,7 +44,7 @@ export const getWeatherCurrentUserPosition = (self, currentPosition) => {
               window.localStorage.lon === position.coords.longitude.toFixed(1)) {
 
             dispatch({type: 'GET_CITY', payload: window.localStorage.city});
-            getWeather(self);
+            getWeather();
           }
           else {
 
@@ -55,7 +55,7 @@ export const getWeatherCurrentUserPosition = (self, currentPosition) => {
             .then(res => {
   
               dispatch({type: 'GET_CITY', payload: res.data.results[0].address_components[3].long_name});
-              getWeather(self);
+              getWeather();
 
               localStorage.setItem("lat", position.coords.latitude.toFixed(1));
               localStorage.setItem("lon", position.coords.longitude.toFixed(1));
