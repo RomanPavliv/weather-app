@@ -15,11 +15,11 @@ export const getWeatherCurrentUserPosition = (self, currentPosition) => {
 
     function getWeather() {
       let weatherUrl = `https://api.openweathermap.org/data/2.5/weather/?q=${self.props.weatherApp.city}
-                 &units=metric&APPID=1feb720412a26a7828127770f514bf58`;
+                        &units=metric&APPID=1feb720412a26a7828127770f514bf58`;
       
       axios.get(weatherUrl)
       .then(res => {
-        let weather = self.props.weatherApp.city + ', ' + res.data.sys.country + ' ' + res.data.main.temp +  ' ' +
+        let weather = self.props.weatherApp.city + ', ' + res.data.sys.country + ' ' + res.data.main.temp + ' ' +
                       String.fromCharCode(176) + 'C, ' + res.data.weather[0].description + ', wind: ' + 
                       res.data.wind.speed + ' m/s';
 
@@ -47,7 +47,6 @@ export const getWeatherCurrentUserPosition = (self, currentPosition) => {
             getWeather();
           }
           else {
-
             let location = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},
                            ${position.coords.longitude}&language=en&key=AIzaSyAlI3lat_5W-O4wWZ0p1peRh6vFCYeD89I`;
 
@@ -85,7 +84,7 @@ export const getCity = name => {
 export const weatherApp = (state = initialState, action) => {
   switch (action.type) {
     case 'GET_WEATHER':
-      return  Object.assign({}, {weather: action.payload});
+      return Object.assign({}, {weather: action.payload});
     case 'GET_CITY':
       return Object.assign({}, {city: action.payload});
     default:
