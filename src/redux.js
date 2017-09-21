@@ -19,9 +19,9 @@ export const getWeatherCurrentUserPosition = (self, currentPosition) => {
       
       axios.get(weatherUrl)
       .then(res => {
-        let weather = self.props.weatherApp.city + ", " + res.data.sys.country + " " + res.data.main.temp +  " " +
-                      String.fromCharCode(176) + "C, " + res.data.weather[0].description + ", wind: " + 
-                      res.data.wind.speed + " m/s";
+        let weather = self.props.weatherApp.city + ', ' + res.data.sys.country + ' ' + res.data.main.temp +  ' ' +
+                      String.fromCharCode(176) + 'C, ' + res.data.weather[0].description + ', wind: ' + 
+                      res.data.wind.speed + ' m/s';
 
         sessionStorage.setItem('weather', weather);
         dispatch({type: 'GET_WEATHER', payload: weather});
@@ -36,7 +36,7 @@ export const getWeatherCurrentUserPosition = (self, currentPosition) => {
     }
     else {
 
-      if ("geolocation" in navigator) {
+      if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(position => {
           
           if (window.localStorage.lat && 
@@ -49,7 +49,7 @@ export const getWeatherCurrentUserPosition = (self, currentPosition) => {
           else {
 
             let location = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},
-            ${position.coords.longitude}&language=en&key=AIzaSyAlI3lat_5W-O4wWZ0p1peRh6vFCYeD89I`;
+                           ${position.coords.longitude}&language=en&key=AIzaSyAlI3lat_5W-O4wWZ0p1peRh6vFCYeD89I`;
 
             axios.get(location)
             .then(res => {
@@ -57,9 +57,9 @@ export const getWeatherCurrentUserPosition = (self, currentPosition) => {
               dispatch({type: 'GET_CITY', payload: res.data.results[0].address_components[3].long_name});
               getWeather();
 
-              localStorage.setItem("lat", position.coords.latitude.toFixed(1));
-              localStorage.setItem("lon", position.coords.longitude.toFixed(1));
-              localStorage.setItem("city", res.data.results[0].address_components[3].long_name);
+              localStorage.setItem('lat', position.coords.latitude.toFixed(1));
+              localStorage.setItem('lon', position.coords.longitude.toFixed(1));
+              localStorage.setItem('city', res.data.results[0].address_components[3].long_name);
   
             })
             .catch(err => {
@@ -67,6 +67,8 @@ export const getWeatherCurrentUserPosition = (self, currentPosition) => {
             });
           }
           
+        }, err => { 
+          dispatch({type: 'GET_WEATHER', payload: 'geolocation is not allowed'});
         });
       } 
       else {
